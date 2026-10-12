@@ -5,9 +5,9 @@ import "../../kambaz.css";
 
 export default function CourseNavigation({ cid }: { cid: string }) {
   const pathname = usePathname() ?? "";
-  const home = `/Kambaz/courses/${cid}/home`;
-  const modules = `/Kambaz/courses/${cid}/modules`;
-  const assignments = `/Kambaz/courses/${cid}/assignments`;
+  const home = `/courses/${cid}/home`;
+  const modules = `/courses/${cid}/modules`;
+  const assignments = `/courses/${cid}/assignments`;
   return (
     <div id="wd-courses-navigation" className="wd list-group rounded-none text-lg">
       <Link

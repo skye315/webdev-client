@@ -123,10 +123,10 @@ export default async function AssignmentEditor({
         </tbody>
       </table>
       <hr />
-      <Link id="wd-cancel" href={`/Kambaz/courses/${cid}/assignments`}>
+      <Link id="wd-cancel" href={`/courses/${cid}/assignments`}>
         Cancel
       </Link>{" "}
-      <Link id="wd-save" href={`/Kambaz/courses/${cid}/assignments`}>
+      <Link id="wd-save" href={`/courses/${cid}/assignments`}>
         Save
       </Link>
     </div>
