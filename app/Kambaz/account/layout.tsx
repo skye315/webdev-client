@@ -6,18 +6,12 @@ export default function AccountLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <div id="wd-kambaz-account">
-      <table>
-        <tbody>
-          <tr>
-            <td valign="top">
-              <AccountNavigation />
-            </td>
-            <td valign="top" width="100%">
-              {children}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div className="flex">
+        <div className="shrink-0">
+          <AccountNavigation />
+        </div>
+        <div className="flex-1">{children}</div>
+        </div>
+      </div>
   );
 }
