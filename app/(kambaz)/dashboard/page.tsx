@@ -21,13 +21,13 @@ export default function Dashboard() {
           id="2345"
           title="CS2345 Node JS"
           subtitle="Server side JavaScript"
-          image="/images/nodejs.jpg"
+          image="/images/nodejs.jpeg"
         />
         <CourseCard
           id="3456"
           title="CS3456 MongoDB"
           subtitle="NoSQL Databases"
-          image="/images/mongodb.jpg"
+          image="/images/mongodb.png"
         />
         <CourseCard
           id="CS9999"
