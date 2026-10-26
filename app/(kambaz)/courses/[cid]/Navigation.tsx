@@ -3,55 +3,51 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "../../kambaz.css";
 
+const LINKS = [
+  { segment: "home", id: "wd-course-home-link", label: "Home" },
+  { segment: "modules", id: "wd-course-modules-link", label: "Modules" },
+  { segment: "piazza", id: "wd-course-piazza-link", label: "Piazza" },
+  { segment: "zoom", id: "wd-course-zoom-link", label: "Zoom" },
+  {
+    segment: "assignments",
+    id: "wd-course-assignments-link",
+    label: "Assignments",
+  },
+  { segment: "quizzes", id: "wd-course-quizzes-link", label: "Quizzes" },
+  { segment: "grades", id: "wd-course-grades-link", label: "Grades"},
+  { segment: "people/table", id: "wd-course-people-link", label: "People" },
+  { segment: "announcements", id: "wd-course-announcements-link", label: "Announcements" },
+] as const;
+
 export default function CourseNavigation({ cid }: { cid: string }) {
   const pathname = usePathname() ?? "";
-  const home = `/courses/${cid}/home`;
-  const modules = `/courses/${cid}/modules`;
-  const assignments = `/courses/${cid}/assignments`;
+  const inCourse = pathname.startsWith(`/courses/${cid}`);
+
   return (
     <div id="wd-courses-navigation" className="wd list-group rounded-none text-lg">
-      <Link
-        href={home}
-        id="wd-course-home-link"
-        className={
-          pathname === home
-            ? "list-group-item active border-0 wd-active"
+      {LINKS.map(({ segment, id, label }) => {
+        const href = `/courses/${cid}/${segment}`;
+
+        const active = inCourse
+        ? pathname === href ||
+          (segment !== "home" && pathname.startsWith(href))
+        : segment === "home";
+
+        return (
+          <Link
+          key={id}
+          href={href}
+          id={id}
+          className={
+            active
+            ? "list-group-item active border-0"
             : "list-group-item border-0 text-red-600"
-        }
-      >
-        Home
-      </Link>
-      <Link
-        href={modules}
-        id="wd-course-modules-link"
-        className={
-          pathname === modules
-            ? "list-group-item active border-0 wd-active"
-            : "list-group-item border-0 text-red-600"
-        }
-      >
-        Modules
-      </Link>
-      {/* ...Piazza and Zoom, same pattern... */}
-      <Link
-        href={assignments}
-        id="wd-course-assignments-link"
-        className={
-          pathname === assignments || pathname.startsWith(assignments + "/")
-            ? "list-group-item active border-0 wd-active"
-            : "list-group-item border-0 text-red-600"
-        }
-      >
-        Assignments
-      </Link>
-      <Link
-        href={home}
-        id="wd-course-ai-link"
-        className="list-group-item border-0 text-red-600"
-      >
-        Sample
-      </Link>
-      {/* ...Quizzes, Grades, People, same pattern... */}
+          }
+          >
+            {label}
+          </Link>
+        ); 
+      })}
     </div>
   );
 }
