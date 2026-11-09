@@ -1,17 +1,24 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useCoursesStore } from "../store/coursesStore";
 
 export default function CourseCard({
   _id,
   name,
   description,
   image,
+  onEdit,
 }: {
   _id: string;
   name: string;
   description: string;
   image: string;
+  onEdit: () => void;
 }) {
+  const deleteCourse = useCoursesStore((state) => state.deleteCourse);
+
   return (
     <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
       <Link
@@ -37,6 +44,28 @@ export default function CourseCard({
             className="inline-flex items-center justify-center rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
           >
             Go
+          </button>
+          <button
+            type="button"
+            id="wd-delete-course-click"
+            className="ml-2 inline-flex items-center justify-center rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
+            onClick={(e) => {
+              e.preventDefault();
+              deleteCourse(_id);
+            }}
+          >
+            Delete
+          </button>
+          <button
+            type="button"
+            id="wd-edit-course-click"
+            className="ml-2 inline-flex items-center justify-center rounded bg-yellow-400 px-3 py-1.5 text-sm font-medium text-white"
+            onClick={(e) => {
+              e.preventDefault();
+              onEdit();
+            }}
+          >
+            Edit
           </button>
         </div>
       </Link>
