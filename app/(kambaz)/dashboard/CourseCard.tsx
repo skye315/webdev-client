@@ -15,7 +15,7 @@ export default function CourseCard({
   name: string;
   description: string;
   image: string;
-  onEdit: () => void;
+  onEdit?: () => void;
 }) {
   const deleteCourse = useCoursesStore((state) => state.deleteCourse);
 
@@ -56,17 +56,19 @@ export default function CourseCard({
           >
             Delete
           </button>
+          {onEdit && (
           <button
             type="button"
             id="wd-edit-course-click"
             className="ml-2 inline-flex items-center justify-center rounded bg-yellow-400 px-3 py-1.5 text-sm font-medium text-white"
             onClick={(e) => {
-              e.preventDefault();
-              onEdit();
-            }}
+            e.preventDefault();
+            onEdit();
+          }}
           >
-            Edit
-          </button>
+          Edit
+        </button>
+        )}
         </div>
       </Link>
     </div>

@@ -7,11 +7,16 @@ import {
   useCoursesStore,
   type Course,
 } from "../store/coursesStore";
+import { useEnrollmentsStore } from "../store/enrollmentsStore";
 
 export default function Dashboard() {
   const courses = useCoursesStore((state) => state.courses);
   const addCourse = useCoursesStore((state) => state.addCourse);
   const updateCourse = useCoursesStore((state) => state.updateCourse);
+  const showAllCourses = useEnrollmentsStore((state) => state.showAllCourses);
+  const toggleShowAllCourses = useEnrollmentsStore(
+    (state) => state.toggleShowAllCourses
+  );
   const [course, setCourse] = useState<Course>(emptyCourse);
 
   return (
@@ -38,6 +43,14 @@ export default function Dashboard() {
           onClick={() => updateCourse(course)}
         >
           Update
+        </button>
+        <button
+          type="button"
+          className="rounded bg-purple-600 px-3 py-1.5 text-sm font-medium text-white"
+          id="wd-enrollments-toggle"
+          onClick={toggleShowAllCourses}
+        >
+          {showAllCourses ? "Hide All" : "Show All"}
         </button>
       </h5>
       <input
